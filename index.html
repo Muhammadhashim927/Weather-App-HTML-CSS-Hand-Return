@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>weatherapp</h1>
+    <form
+      onsubmit="
+        checkWeather();
+        return false;
+      "
+    >
+      <input type="text" name="cityName" id="cityName" />
+      <button>Check Weather 🌦️</button>
+    </form>
+    <div id="weather"></div>
+    <link rel="stylesheet" href="style.css">
+    <script>
+      function checkWeather() {
+        const cityRef = document.querySelector("#cityName");
+        const cityValue = cityRef.value;
+        const weatherRef = document.querySelector("#weather");
+        // api calling
+        const cityRES = fetch(
+          `https://p2pclouds.up.railway.app/v1/learn/weather?city=${cityValue}`
+        );
+        cityRES
+          .then((data) => {
+            return data.json();
+          })
+          .then((data) => {
+            weatherRef.innerHTML = `${cityValue} Its Temprature feels like is ${data["current"]["feelslike_c"]}`;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    </script>
+    <script>
+      let weatherRes = new Promise((resolve, reject) => {
+        if (2 > 3) {
+          resolve({ weather: "12 DEGREE" });
+        } else {
+          reject({ message: "Something went wrong" });
+        }
+      });
+      weatherRes
+        .then((data) => {
+          console.log("I am then");
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log("Iam catch");
+          console.log(error);
+        });
+      // api calling
+      const cityRES = fetch(
+        `https://p2pclouds.up.railway.app/v1/learn/weather?city=${cityValue}`
+      );
+      cityRES
+        .then((data) => {
+          return data.json();
+        })
+        .then((data) => {
+          weatherRef.innerHTML = `${cityValue} Its Temprature feels like is ${["current"]["feelslike_c"]}`;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>
