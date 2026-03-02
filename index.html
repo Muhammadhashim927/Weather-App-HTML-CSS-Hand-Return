@@ -6,7 +6,7 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>weatherapp</h1>
+    <h1>Weather App</h1>
     <form
       onsubmit="
         checkWeather();
@@ -24,10 +24,11 @@
         const cityValue = cityRef.value;
         const weatherRef = document.querySelector("#weather");
         // api calling
-        const cityRES = fetch(
+        const cityRes = fetch(
           `https://p2pclouds.up.railway.app/v1/learn/weather?city=${cityValue}`
         );
-        cityRES
+        console.log(cityRes);
+        cityRes
           .then((data) => {
             return data.json();
           })
@@ -37,10 +38,8 @@
           .catch((err) => {
             console.log(err);
           });
-      }
-    </script>
-    <script>
-      let weatherRes = new Promise((resolve, reject) => {
+      
+          let weatherRes = new Promise((resolve, reject) => {
         if (2 > 3) {
           resolve({ weather: "12 DEGREE" });
         } else {
@@ -65,11 +64,14 @@
           return data.json();
         })
         .then((data) => {
-          weatherRef.innerHTML = `${cityValue} Its Temprature feels like is ${["current"]["feelslike_c"]}`;
+          weatherRef.innerHTML = `${cityValue} Its Temprature feels like is ${data ["current"]["feelslike_c"]}`;
         })
         .catch((err) => {
           console.log(err);
         });
+    }
+    
     </script>
+    
   </body>
 </html>
